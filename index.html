@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="expresion" placeholder="Introduce las operaciones"> 
+    <button type="button" id="btnGenerar" >Generar Arbol</button >
+    <button type="button" id="btnPre" >Generar PreOrder</button > 
+    <button type="button" id="btnPost" >Generar PostOrder</button > 
+
+        <script>
+            const binaryTree = new ArbolBinario();
+
+            document.getElementById("btnGenerar").addEventListener("click",()=>{
+                let expresion= document.getElementById("expresion").value;
+                let listaExpresion= new Expresion();
+                binaryTree.generarLista(expresion);
+            })
+        </script>
+</body>
+</html>
