@@ -18,8 +18,15 @@
 
             document.getElementById("btnGenerar").addEventListener("click",()=>{
                 let expresion= document.getElementById("expresion").value;
-                let listaExpresion= new Expresion();
                 binaryTree.generarLista(expresion);
+            })
+            document.getElementById("btnPre").addEventListener("click",()=>{
+                let expresion= document.getElementById("expresion").value;
+                binaryTree.preOrder();
+            })
+            document.getElementById("btnPre").addEventListener("click",()=>{
+                let expresion= document.getElementById("expresion").value;
+                binaryTree.postOrder();
             })
         </script>
 </body>

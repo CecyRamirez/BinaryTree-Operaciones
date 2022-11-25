@@ -8,37 +8,49 @@ class Nodo{
     }
 }
 
-class Expresion{
-    constructor(){
-        this.primero=null;
-    }
-    agregar(nuevo){
-        if (this.primero==null)
-            this.primero=nuevo;
-        else{
-        let temp=this.primero;
-        while (temp.sig!=null)
-            temp=temp.sig;
-        temp.sig=nuevo;
-        temp.sig.ant= temp
-        }
-    }
-}
 
 class ArbolBinario{
     constructor(){
         this.raiz=null;
+        this.primero=null;
+    }
+    listado(){
+        let res="";
+        let aux=this.primero;
+        while (aux!=null){
+            res += aux.simbolo + " ";
+            aux=aux.sig;
+        }
+        return res;
     }
     generarLista(expresion){
+        console.log(expresion);
+        let i=0;
+        let valor;
+        let nodo;
         while(expresion[i] != null){
-            let nodo=new Nodo(expresion[i]);
-            lista.agregar(nodo);
+            console.log(expresion[0]);
+            valor= expresion[0]
+            nodo = new Nodo(valor);
+            console.log(nodo);
+
+            if (this.primero==null){
+                this.primero=nodo;
+            }
+            else{
+                let temp=this.primero;
+                while (temp.sig!=null)
+                    temp=temp.sig;
+                temp.sig=nodo;
+                temp.sig.ant= temp
+            }
+            i++
         }
-        console.log(listaExpresion);
+        console.log(binaryTree.listado());
     }
     
-    generarArbol(listaExpresion){
-        aux=listaExpresion.primero;
+    generarArbol(binaryTree){
+        aux=binaryTree.primero;
         //buscar * y /
         while (aux!=null){
             if(aux.simbolo == '*' || aux.simbolo == '/'){
@@ -68,5 +80,22 @@ class ArbolBinario{
             aux=aux.sig;
         }
     }
+    preOrder(aux = this.raiz){
+        if (!aux){
+            return
+        }
+        console.log(aux.simbolo)
+        this.preOrder(aux.izq)
+        this.preOrder(aux.der)
+    }
+    postOrder(aux = this.raiz){
+        if (!aux){
+            return
+        }
+        this.preOrder(aux.izq)
+        this.preOrder(aux.der)
+        console.log(aux.simbolo)
+    }
+
 }
 
