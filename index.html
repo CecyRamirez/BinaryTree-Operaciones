@@ -13,6 +13,8 @@
     <button type="button" id="btnPre" >Generar PreOrder</button > 
     <button type="button" id="btnPost" >Generar PostOrder</button > 
     <button id="listar">listar</button>
+    <button id="btnListaPre">Listar PreOrder</button>
+    <button id="btnListaPost">Listar PostOrder</button>
 
         <script>
             const binaryTree = new ArbolBinario();
@@ -32,7 +34,12 @@
             document.getElementById("listar").addEventListener("click",()=>{
                 binaryTree.listado();
             })
-
+            document.getElementById("btnListaPre").addEventListener("click",()=>{
+                binaryTree.listaPre();
+            })
+            document.getElementById("btnListaPost").addEventListener("click",()=>{
+                binaryTree.listaPost();
+            })
         </script>
 </body>
 </html>

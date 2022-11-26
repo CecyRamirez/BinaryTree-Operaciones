@@ -13,7 +13,6 @@ class Pila{
     }
     push(element){
       this.pila.push(element);
-      return this.pila;
     }
     pop(){
       return this.pila.pop();
@@ -22,7 +21,7 @@ class Pila{
 
     }
 }  
-const pila = new Pila();
+let pila = new Pila();
 
 class Cola{
     constructor(){
@@ -30,13 +29,12 @@ class Cola{
     }
     enqueue(element){
       this.cola.push(element);
-      return this.cola;
     }
     dequeue(){
       return this.cola.shift();
     }
 }
-const cola = new Cola();
+let cola = new Cola();
 
 class ArbolBinario{
     constructor(){
@@ -58,7 +56,7 @@ class ArbolBinario{
         console.log(expresion);
         for(let i=0; i<largo; i++){
             nodo = new Nodo(expresion[i]);
-            this.agregar(nodo)
+            this.agregar(nodo);
 
         }
         this.generarArbol();
@@ -70,10 +68,11 @@ class ArbolBinario{
         }
         else{
             let temp=this.primero;
-            while (temp.sig!=null)
-            temp=temp.sig;
+            while (temp.sig!=null){
+                temp=temp.sig;
+            }
             temp.sig=nodo;
-            temp.sig.ant= temp
+            temp.sig.ant= temp;
         }
         
     }
@@ -86,11 +85,16 @@ class ArbolBinario{
                 aux.izq= aux.ant;
                 aux.der=aux.sig;
                 //borrar ant y sig
-                aux.sig.sig.ant=aux;
                 aux.sig=aux.sig.sig;
-                aux.ant.ant.sig=aux;
-                aux.ant=aux.ant.ant;
+                aux.sig.ant=aux
+                if(aux.ant==this.primero){
+                    this.primero=aux
+                }
+                else{
+                    aux.ant=aux.ant.ant;
+                    aux.ant.sig=aux;
 
+                }
             }
             aux=aux.sig;
         }
@@ -100,11 +104,16 @@ class ArbolBinario{
                 aux.izq= aux.ant;
                 aux.der=aux.sig;
                 //borrar ant y sig
-                aux.sig.sig.ant=aux;
                 aux.sig=aux.sig.sig;
-                aux.ant.ant.sig=aux;
-                aux.ant=aux.ant.ant;
+                aux.sig.ant=aux;
+                if(aux.ant==this.primero){
+                    this.primero=aux
+                }
+                else{
+                    aux.ant=aux.ant.ant;
+                    aux.ant.sig=aux;
 
+                }
             }
             aux=aux.sig;
         }
@@ -127,6 +136,20 @@ class ArbolBinario{
         this.preOrder(aux.izq);
         this.preOrder(aux.der);
         cola.enqueue(aux.simbolo);
+    }
+    listaPre(){
+        let res="";
+        for(let i=0; i<cola.length; i++){
+            res+= pila[i] + " ";
+        }
+        console.log(res);
+    }
+    listaPost(){
+        let res="";
+        for(let i=0; i<cola.length; i++){
+            res+= cola[i] + " ";
+        }
+        console.log(res);
     }
 }
 
