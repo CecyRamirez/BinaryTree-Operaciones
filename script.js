@@ -50,7 +50,7 @@ class ArbolBinario{
             res += aux.simbolo + " ";
             aux=aux.sig;
         }
-        return res;
+        console.log('lista: ' + res);
     }
     generarLista(expresion){
         let nodo= new Nodo();
@@ -61,6 +61,7 @@ class ArbolBinario{
             this.agregar(nodo)
 
         }
+        this.generarArbol();
     }
     agregar(nodo){
         if (this.primero==null){
@@ -77,8 +78,8 @@ class ArbolBinario{
         
     }
     
-    generarArbol(binaryTree){
-        aux=binaryTree.primero;
+    generarArbol(){
+        let aux=this.primero;
         //buscar * y /
         while (aux!=null){
             if(aux.simbolo == '*' || aux.simbolo == '/'){
@@ -107,6 +108,9 @@ class ArbolBinario{
             }
             aux=aux.sig;
         }
+        this.raiz=this.primero;
+        let root=this.raiz;
+        console.log(root);
     }
     preOrder(aux = this.raiz){
         if (!aux){
