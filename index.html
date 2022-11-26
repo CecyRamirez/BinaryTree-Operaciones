@@ -12,6 +12,7 @@
     <button type="button" id="btnGenerar" >Generar Arbol</button >
     <button type="button" id="btnPre" >Generar PreOrder</button > 
     <button type="button" id="btnPost" >Generar PostOrder</button > 
+    <button id="listar">listar</button>
 
         <script>
             const binaryTree = new ArbolBinario();
@@ -28,6 +29,10 @@
                 let expresion= document.getElementById("expresion").value;
                 binaryTree.postOrder();
             })
+            document.getElementById("listar").addEventListener("click",()=>{
+                binaryTree.listado();
+            })
+
         </script>
 </body>
 </html>

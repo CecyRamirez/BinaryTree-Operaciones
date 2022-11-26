@@ -1,37 +1,38 @@
-const { stack } = require("../3api/api/app/routes");
-
 class Nodo{
     constructor(simbolo){
-        this.simbolo = null;
+        this.simbolo=simbolo;
         this.izq = null;
         this.der= null;
         this.sig=null;
         this.ant=null; 
     }
 }
-class Pila {
-    constructor() {
+class Pila{
+    constructor(){
       this.pila = [];
     }
-    push(element) {
+    push(element){
       this.pila.push(element);
       return this.pila;
     }
-    pop() {
+    pop(){
       return this.pila.pop();
+    }
+    resolver(){
+
     }
 }  
 const pila = new Pila();
 
-class Cola {
-    constructor() {
+class Cola{
+    constructor(){
       this.cola = [];
     }
-    enqueue(element) {
+    enqueue(element){
       this.cola.push(element);
       return this.cola;
     }
-    dequeue() {
+    dequeue(){
       return this.cola.shift();
     }
 }
@@ -52,28 +53,28 @@ class ArbolBinario{
         return res;
     }
     generarLista(expresion){
+        let nodo= new Nodo();
+        let largo = Number(expresion.length);
         console.log(expresion);
-        let i=0;
-        while(expresion[i] != null){
-            console.log(expresion[0]);
-            let nodo = new Nodo(expresion[i]);
-            console.log(nodo);
+        for(let i=0; i<largo; i++){
+            nodo = new Nodo(expresion[i]);
             this.agregar(nodo)
-            i++
+
         }
-        console.log(binaryTree.listado());
     }
     agregar(nodo){
         if (this.primero==null){
             this.primero=nodo;
+            console.log('se agregó ' + nodo);
         }
         else{
             let temp=this.primero;
             while (temp.sig!=null)
-                temp=temp.sig;
+            temp=temp.sig;
             temp.sig=nodo;
             temp.sig.ant= temp
         }
+        
     }
     
     generarArbol(binaryTree){
@@ -123,6 +124,5 @@ class ArbolBinario{
         this.preOrder(aux.der);
         cola.enqueue(aux.simbolo);
     }
-
 }
 
