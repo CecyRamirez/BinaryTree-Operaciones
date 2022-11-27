@@ -7,39 +7,12 @@ class Nodo{
         this.ant=null; 
     }
 }
-class Pila{
-    constructor(){
-      this.pila = [];
-    }
-    push(element){
-      this.pila.push(element);
-    }
-    pop(){
-      return this.pila.pop();
-    }
-    resolver(){
-
-    }
-}  
-let pila = new Pila();
-
-class Cola{
-    constructor(){
-      this.cola = [];
-    }
-    enqueue(element){
-      this.cola.push(element);
-    }
-    dequeue(){
-      return this.cola.shift();
-    }
-}
-let cola = new Cola();
-
 class ArbolBinario{
     constructor(){
         this.raiz=null;
         this.primero=null;
+        this.pila=[];
+        this.cola=[];
     }
     listado(){
         let res="";
@@ -86,7 +59,12 @@ class ArbolBinario{
                 aux.der=aux.sig;
                 //borrar ant y sig
                 aux.sig=aux.sig.sig;
-                aux.sig.ant=aux
+                if(aux.sig==null){
+                    aux.ant.sig=null;
+                }
+                else{
+                    aux.sig.ant=aux;
+                }
                 if(aux.ant==this.primero){
                     this.primero=aux
                 }
@@ -98,6 +76,7 @@ class ArbolBinario{
             }
             aux=aux.sig;
         }
+        aux=this.primero;
         //buscar + y -
         while (aux!=null){
             if(aux.simbolo == '+' || aux.simbolo == '-'){
@@ -105,7 +84,12 @@ class ArbolBinario{
                 aux.der=aux.sig;
                 //borrar ant y sig
                 aux.sig=aux.sig.sig;
-                aux.sig.ant=aux;
+                if(aux.sig==null){
+                    aux.ant.sig=null;
+                }
+                else{
+                    aux.sig.ant=aux;
+                }
                 if(aux.ant==this.primero){
                     this.primero=aux
                 }
@@ -121,31 +105,71 @@ class ArbolBinario{
         let root=this.raiz;
         console.log(root);
     }
-    preOrder(aux = this.raiz){
-        if (!aux){
-            return;
+    inorder(){
+        if(this.raiz==null){
+            return "";
         }
-        pila.push(aux.simbolo);
-        this.preOrder(aux.izq);
-        this.preOrder(aux.der);
+        else{
+            return this._inOrder(this.raiz);
+        }
     }
-    postOrder(aux = this.raiz){
-        if (!aux){
-            return;
+    _inOrder(nodo){ // IRD
+        if(nodo.izq!=null){
+            this._inOrder(nodo.izq);   //I
         }
-        this.preOrder(aux.izq);
-        this.preOrder(aux.der);
-        cola.enqueue(aux.simbolo);
+        console.log(nodo.simbolo);  // R
+        if(nodo.der!=null){
+            this._inOrder(nodo.der); //D
+        }
+    }
+    preOrder(){
+        if(this.raiz==null){
+            return "";
+        }
+        else{
+            return this._preOrder(this.raiz);
+        }
+    }
+    _preOrder(nodo){
+        console.log(nodo.simbolo);  // R
+        this.pila.push(nodo.simbolo);
+        if(nodo.izq!=null){
+            this._preOrder(nodo.izq);   //I
+        }
+        if(nodo.der!=null){
+            this._preOrder(nodo.der); //D
+        }
+
+    }
+    postOrder(){
+        if(this.raiz==null){
+            return "";
+        }
+        else{
+            return this._postOrder(this.raiz);
+        }
+    }
+    _postOrder(nodo){
+        if(nodo.izq!=null){
+            this._postOrder(nodo.izq);   //I
+        }
+        if(nodo.der!=null){
+            this._postOrder(nodo.der); //D
+        }
+        console.log(nodo.simbolo);  // R
+        this.cola.push(nodo.simbolo);
     }
     listaPre(){
         let res="";
-        for(let i=0; i<cola.length; i++){
+        let pila=this.pila;
+        for(let i=0; i<pila.length; i++){
             res+= pila[i] + " ";
         }
         console.log(res);
     }
     listaPost(){
         let res="";
+        let cola=this.cola;
         for(let i=0; i<cola.length; i++){
             res+= cola[i] + " ";
         }
