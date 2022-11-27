@@ -105,23 +105,6 @@ class ArbolBinario{
         let root=this.raiz;
         console.log(root);
     }
-    inorder(){
-        if(this.raiz==null){
-            return "";
-        }
-        else{
-            return this._inOrder(this.raiz);
-        }
-    }
-    _inOrder(nodo){ // IRD
-        if(nodo.izq!=null){
-            this._inOrder(nodo.izq);   //I
-        }
-        console.log(nodo.simbolo);  // R
-        if(nodo.der!=null){
-            this._inOrder(nodo.der); //D
-        }
-    }
     preOrder(){
         if(this.raiz==null){
             return "";
@@ -131,13 +114,12 @@ class ArbolBinario{
         }
     }
     _preOrder(nodo){
-        console.log(nodo.simbolo);  // R
         this.pila.push(nodo.simbolo);
         if(nodo.izq!=null){
-            this._preOrder(nodo.izq);   //I
+            this._preOrder(nodo.izq); 
         }
         if(nodo.der!=null){
-            this._preOrder(nodo.der); //D
+            this._preOrder(nodo.der);
         }
 
     }
@@ -151,16 +133,15 @@ class ArbolBinario{
     }
     _postOrder(nodo){
         if(nodo.izq!=null){
-            this._postOrder(nodo.izq);   //I
+            this._postOrder(nodo.izq);
         }
         if(nodo.der!=null){
-            this._postOrder(nodo.der); //D
+            this._postOrder(nodo.der);
         }
-        console.log(nodo.simbolo);  // R
         this.cola.push(nodo.simbolo);
     }
     listaPre(){
-        let res="";
+        let res="PreOrder: ";
         let pila=this.pila;
         for(let i=0; i<pila.length; i++){
             res+= pila[i] + " ";
@@ -168,12 +149,97 @@ class ArbolBinario{
         console.log(res);
     }
     listaPost(){
-        let res="";
+        let res="PostOrder: ";
         let cola=this.cola;
         for(let i=0; i<cola.length; i++){
             res+= cola[i] + " ";
         }
         console.log(res);
+    }
+    resolverPre(){
+        let aux=[];
+        let n1= "";
+        let n2="";
+        let operador="";
+        let res=0;
+        if(this.pila==null){
+            return "No hay PreOrder, Generalo"
+        }
+        else{
+            for(let i=this.pila.length-1;i>=0;i--){
+                if(this.pila[i].match(/^[0-9]+$/)){
+                    aux.push(this.pila.pop())
+                }
+                else{
+                    n1=aux.pop();
+                    operador= this.pila[i];
+                    this.pila.pop()
+                    n2=aux.pop();
+                    if(operador==="*"){
+                        res= Number(n1)*Number(n2);
+                        aux.push(res);
+                    }
+                    if(operador==="/"){
+                        res= Number(n1)/Number(n2);
+                        aux.push(res);
+                    }
+                    if(operador==="+"){
+                        res= Number(n1)+Number(n2);
+                        aux.push(res);
+                    }
+                    if(operador==="-"){
+                        res= Number(n1)-Number(n2);
+                        aux.push(res);
+                    }
+                }
+            }
+            return res;
+        }
+    }
+    resolverPost(){
+        let aux=[];
+        let n1= "";
+        let n2="";
+        let operador="";
+        let res=0;
+        if(this.cola==null){
+            return "No hay PostOrder, Generalo"
+        }
+        else{
+            for(let i=0;i<this.cola.length;i++){
+                if(this.cola[0].match(/^[0-9]+$/)){
+                    aux.push(this.cola[0]);
+                    for(let j=0;j<this.cola.length;j++){
+                        this.cola[j]=this.cola[j+1];
+                    }
+                }
+                else{
+                    n1=aux.pop();
+                    operador= this.cola[0];
+                    for(let j=0;j<this.cola.length;j++){
+                        this.cola[j]=this.cola[j+1];
+                    }
+                    n2=aux.pop();
+                    if(operador==="*"){
+                        res= Number(n2)*Number(n1);
+                        aux.push(res);
+                    }
+                    if(operador==="/"){
+                        res= Number(n2)/Number(n1);
+                        aux.push(res);
+                    }
+                    if(operador==="+"){
+                        res= Number(n2)+Number(n1);
+                        aux.push(res);
+                    }
+                    if(operador==="-"){
+                        res= Number(n2)-Number(n1);
+                        aux.push(res);
+                    }
+                }
+            }
+            return res;
+        }
     }
 }
 

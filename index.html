@@ -15,6 +15,8 @@
     <button id="listar">listar</button>
     <button id="btnListaPre">Listar PreOrder</button>
     <button id="btnListaPost">Listar PostOrder</button>
+    <button id="resolverPre">Resolver PreOrder</button>
+    <button id="resolverPost">Resolver PostOrder</button>
 
         <script>
             const binaryTree = new ArbolBinario();
@@ -39,6 +41,12 @@
             })
             document.getElementById("btnListaPost").addEventListener("click",()=>{
                 binaryTree.listaPost();
+            })
+            document.getElementById("resolverPre").addEventListener("click",()=>{
+                console.log(binaryTree.resolverPre());
+            })
+            document.getElementById("resolverPost").addEventListener("click",()=>{
+                console.log(binaryTree.resolverPost());
             })
         </script>
 </body>
